@@ -17,6 +17,8 @@ import AddProfile from "./AddProfile";
 import AddPhoto from "./AddPhoto";
 import { Link, Route } from "react-router-dom";
 import { auth } from "./firebase";
+import MyProfile from "./MyProfile";
+import Map from "./Map";
 
 export function SignIn(props) {
   const [email, setEmail] = useState("");
@@ -214,7 +216,7 @@ export function App(props) {
             color="inherit"
             style={{ flexGrow: 1, marginLeft: "30px" }}
           >
-            My App
+            Tutor App
           </Typography>
           <Typography color="inherit" style={{ marginRight: "30px" }}>
             Hi! {user.email}
@@ -231,13 +233,27 @@ export function App(props) {
         }}
       >
         <List>
-          <ListItem button>
+          <ListItem onClick={()=> {props.history.push("/app"); setDrawerOpen(false)}} button>
             <ListItemText primary="Home" />
+          </ListItem>
+          <ListItem onClick={()=> {props.history.push("/app/MyProfile"); setDrawerOpen(false)}} button>
+            <ListItemText primary="My Profile" />
+          </ListItem>
+          <ListItem onClick={()=> {props.history.push("/app/Map"); setDrawerOpen(false)}} button>
+            <ListItemText primary="Map" />
           </ListItem>
         </List>
       </Drawer>
-      
+
       <AddProfile/>
+
+      <Route path="/app/MyProfile">
+          <MyProfile user={user}/>
+      </Route>
+
+      <Route path="/app/Map">
+          <Map user={user}/>
+      </Route>
 
     </div>
   );

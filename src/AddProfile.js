@@ -15,7 +15,7 @@ import {
 } from "@material-ui/core";
 import { Link, Route } from "react-router-dom";
 import AddPhoto from "./AddPhoto";
-import { auth } from "./firebase";
+import { auth, db } from "./firebase";
 
 export default function AddProfile(props){
         const [name, setName] = useState("")
@@ -23,6 +23,22 @@ export default function AddProfile(props){
         const [major, setmajor] = useState("")
         const [subject, setSubject] = useState("")
         const [rate, setRate] = useState("")
+
+        const handleSave = () => {
+            db.collection('users').doc(props.user.uid).collection('AddProfile').add({
+                name:name,
+                school: school,
+                major:major,
+                subject:subject,
+                rate:rate,
+            }).then(()=> {
+                    setName("")
+                    setSchool("")
+                    setmajor("")
+                    setSubject("")
+                    setRate("")
+            })
+        }
     return(
         <div style={{display:'flex', justifyContent: 'center'}}>
             <Paper style={{padding: 12, marginTop: 30, width: '100%', maxWidth: 400}}>
@@ -38,7 +54,7 @@ export default function AddProfile(props){
                 <TextField fullWidth value={subject} onChange={(e)=> setSubject(e.target.value)}/>
                 <Typography style={{marginTop:16}}>What is your hourly rate?</Typography>
                 <TextField fullWidth value={rate} onChange={(e)=> setRate(e.target.value)}/>
-                <Button variant="outlined" color='primary' style={{marginTop:16}}>Create Profile</Button>
+                <Button onClick={handleSave} variant="outlined" color='primary' style={{marginTop:16}}>Create Profile</Button>
             </Paper>
         </div>
     )
