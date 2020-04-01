@@ -169,6 +169,7 @@ export function SignUp(props) {
 }
 
 export function App(props) {
+  console.log(props)
   const [drawer_open, setDrawerOpen] = useState(false);
   const [user, setUser] = useState(null);
 
@@ -245,7 +246,9 @@ export function App(props) {
         </List>
       </Drawer>
 
-      <AddProfile/>
+      <Route exact path="/app">
+      <AddProfile user={user} push={props.history.push} />
+      </Route>
 
       <Route path="/app/MyProfile">
           <MyProfile user={user}/>

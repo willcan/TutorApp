@@ -25,18 +25,19 @@ export default function AddProfile(props){
         const [rate, setRate] = useState("")
 
         const handleSave = () => {
-            db.collection('users').doc(props.user.uid).collection('AddProfile').add({
+            db.collection('users').doc(props.user.uid).set({
                 name:name,
                 school: school,
                 major:major,
                 subject:subject,
                 rate:rate,
-            }).then(()=> {
+            },{merge:true}).then(()=> {
                     setName("")
                     setSchool("")
                     setmajor("")
                     setSubject("")
                     setRate("")
+                    props.push("/App/MyProfile")
             })
         }
     return(
