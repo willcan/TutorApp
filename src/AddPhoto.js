@@ -23,6 +23,12 @@ import { auth } from "./firebase";
 
 export default function AddPhoto(props){
         const [dialog_open, setDialogOpen] = useState()
+        const [title, setTitle] = useState("")
+        const handleSavePhoto = () => {
+          console.log("handleSavePhoto")
+
+
+        }
     return(
       <Dialog
           open = {props.open}
@@ -32,14 +38,14 @@ export default function AddPhoto(props){
         >
           <DialogTitle>Add a photo</DialogTitle>
           <DialogContent>
-            <TextField label="Name" fullwidth/>
+            <TextField label="Name" fullwidth value={title} onChange={(e) => {setTitle(e.target.value)} }/>
             <Button variant='contained' style={{marginTop: 20}}>Choose a file</Button>
           </DialogContent>
         <DialogActions>
           <Button color="primary" onClick={props.onClose}>
             Cancel
           </Button>
-          <Button color="primary" variant="contained">
+          <Button color="primary" variant="contained" onClick={handleSavePhoto}>
             Save
           </Button>
         </DialogActions>

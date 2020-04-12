@@ -46,15 +46,14 @@ return(
             <AddPhoto style={{marginTop:16}}/>
             <Typography style={{marginTop:16}}>Name</Typography>
             <TextField fullWidth value={name} onChange={(e)=> setName(e.target.value)}/>
-            <Typography style={{marginTop:16}}>What is your school/university?</Typography>
+            <Typography style={{marginTop:16}}>My school/university</Typography>
             <TextField fullWidth value={school} onChange={(e)=> setSchool(e.target.value)}/>
-            <Typography style={{marginTop:16}}>What is your major?</Typography>
+            <Typography style={{marginTop:16}}>My major</Typography>
             <TextField fullWidth value={major} onChange={(e)=> setmajor(e.target.value)}/>
-            <Typography style={{marginTop:16}}>Which subject do you teach?</Typography>
+            <Typography style={{marginTop:16}}>My subject</Typography>
             <TextField fullWidth value={subject} onChange={(e)=> setSubject(e.target.value)}/>
-            <Typography style={{marginTop:16}}>What is your hourly rate?</Typography>
+            <Typography style={{marginTop:16}}>My hourly rate</Typography>
             <TextField fullWidth value={rate} onChange={(e)=> setRate(e.target.value)}/>
-            <Button variant="outlined" color='primary' style={{marginTop:16}}>Create Profile</Button>
         </Paper>
     </div>
 )

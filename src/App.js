@@ -16,13 +16,17 @@ import {
 import AddProfile from "./AddProfile";
 import AddPhoto from "./AddPhoto";
 import { Link, Route } from "react-router-dom";
-import { auth } from "./firebase";
+import { auth, db } from "./firebase";
 import MyProfile from "./MyProfile";
 import Map from "./Map";
 
 export function SignIn(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [user, setUser] = useState(null);
+  const [profile, setProfile] = useState([
+    {id:0, name: "Willy"}
+  ]);
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(u => {
@@ -34,6 +38,16 @@ export function SignIn(props) {
 
     return unsubscribe;
   }, [props.history]);
+
+  useEffect(()=>{
+    db.collection('users').doc(user.uid).collection('albums').onSnapshot((snapshot)=>{
+        const updated_profile = []
+        snapshot.forEach((s)=>{
+          const data = s.data();
+          data.id = s.id
+        })
+    })
+  },[user])
 
   const handleSignIn = () => {
     auth
