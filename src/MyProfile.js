@@ -13,6 +13,12 @@ import {
   Toolbar,
   Typography
 } from "@material-ui/core";
+import { makeStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
 import { Link, Route } from "react-router-dom";
 import AddPhoto from "./AddPhoto";
 import PhotoCard from "./PhotoCard";
@@ -23,32 +29,51 @@ import Profile from "./Profile";
 export default function AddProfile(props){
     const [name, setName] = useState("")
     const [school, setSchool] = useState("")
-    const [major, setmajor] = useState("")
+    const [major, setMajor] = useState("")
     const [subject, setSubject] = useState("")
     const [rate, setRate] = useState("")
     const [dialog_open, setDialogOpen] = useState(false)
+console.log(props.user.uid)
 
-    const handleSave = () => {
-        db.collection('users').doc(props.user.uid).collection('profile').add({
-            name:name,
-            school: school,
-            major:major,
-            subject:subject,
-            rate:rate,
-        }).then(()=> {
-                setName("")
-                setSchool("")
-                setmajor("")
-                setSubject("")
-                setRate("")
-        })
-    }
+    useEffect(()=>{db.collection('users').doc(props.user.uid).onSnapshot((snapshot)=>{
+            setName(snapshot.data().name)
+            setSchool(snapshot.data().school)
+            setMajor(snapshot.data().major)
+            setSubject(snapshot.data().subject)
+            setRate(snapshot.data().rate)
+    })}, [])
+
 return(
-    <div style={{display:'flex', justifyContent: 'center'}}>
-        <Paper style={{padding: 12, marginTop: 30, width: '100%', maxWidth: 400}}>
-        <Photo/>
-        </Paper>
-    </div>
-)
-
+    <Card>
+      <CardActionArea>
+        <CardMedia
+        />
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="h2">
+          {name}
+          </Typography>
+          <Typography variant="body1" color="textSecondary" component="p">
+          {school}
+          </Typography>
+          <Typography variant="body1" color="textSecondary" component="p">
+          {major}
+          <Typography variant="body1" color="textSecondary" component="p">
+          {subject}
+          <Typography variant="body1" color="textSecondary" component="p">
+          {rate}
+          </Typography>
+          </Typography>
+          </Typography>
+        </CardContent>
+      </CardActionArea>
+      <CardActions>
+        <Button size="small" color="primary">
+          Share
+        </Button>
+        <Button size="small" color="primary">
+          Learn More
+        </Button>
+      </CardActions>
+    </Card>
+  );
 }

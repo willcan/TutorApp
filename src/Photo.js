@@ -30,8 +30,6 @@ export default function Photo(props){
             <PhotoCard photo={p}/>
           )
         })}
-      <Button variant="outlined" color='primary' style={{marginTop:16}} onClick={()=>{setDialogOpen(true)}}>Edit profile photo</Button>
-      <AddPhoto open={dialog_open} onClose={()=>{setDialogOpen(false)}}/>
       </div>
     )
 
