@@ -21,6 +21,7 @@ import DialogActions from "@material-ui/core/DialogActions";
 import { Link, Route } from "react-router-dom";
 import { auth } from "./firebase";
 
+
 export default function AddPhoto(props){
         const [dialog_open, setDialogOpen] = useState()
         const [title, setTitle] = useState("")

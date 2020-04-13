@@ -15,6 +15,7 @@ import {
 } from "@material-ui/core";
 import { Link, Route } from "react-router-dom";
 import AddPhoto from "./AddPhoto";
+import PhotoCard from "./PhotoCard";
 import { auth, db } from "./firebase";
 
 export default function AddProfile(props){
@@ -43,7 +44,7 @@ return(
     <div style={{display:'flex', justifyContent: 'center'}}>
         <Paper style={{padding: 12, marginTop: 30, width: '100%', maxWidth: 400}}>
             <Typography variant="h5">My Profile</Typography>
-            <AddPhoto style={{marginTop:16}}/>
+            <PhotoCard/>
             <Typography style={{marginTop:16}}>Name</Typography>
             <TextField fullWidth value={name} onChange={(e)=> setName(e.target.value)}/>
             <Typography style={{marginTop:16}}>My school/university</Typography>

@@ -15,6 +15,7 @@ import {
 } from "@material-ui/core";
 import { Link, Route } from "react-router-dom";
 import AddPhoto from "./AddPhoto";
+import PhotoCard from "./PhotoCard";
 import Photo from "./Photo";
 import { auth, db } from "./firebase";
 
