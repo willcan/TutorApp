@@ -21,16 +21,16 @@ import { auth } from "./firebase";
 
 export default function Photo(props){
     const [dialog_open, setDialogOpen] = useState(false)
-    const [photos, setPhotos] = useState([{id:0, name:'Willy', image:'https://images.pexels.com/photos/2951457/pexels-photo-2951457.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500'}])
+    const [addprofile, setAddProfile] = useState([{id:0, school:'BYU', major:'Finance', subject:'Math', rate: '$35'}])
         
     return(
       <div>
-        {photos.map((p)=>{
+        {addprofile.map((p)=>{
           return(
-            <PhotoCard photo={p}/>
+            <AddProfile addprofile={p}/>
           )
         })}
-      <Button variant="outlined" color='primary' style={{marginTop:16}} onClick={()=>{setDialogOpen(true)}}>Edit profile photo</Button>
+      <Button variant="outlined" color='primary' style={{marginTop:16}} onClick={()=>{setDialogOpen(true)}}>Add profile photo</Button>
       <AddPhoto open={dialog_open} onClose={()=>{setDialogOpen(false)}}/>
       </div>
     )

@@ -17,6 +17,8 @@ import { Link, Route } from "react-router-dom";
 import AddPhoto from "./AddPhoto";
 import PhotoCard from "./PhotoCard";
 import { auth, db } from "./firebase";
+import Photo from "./Photo";
+import Profile from "./Profile";
 
 export default function AddProfile(props){
     const [name, setName] = useState("")
@@ -24,6 +26,7 @@ export default function AddProfile(props){
     const [major, setmajor] = useState("")
     const [subject, setSubject] = useState("")
     const [rate, setRate] = useState("")
+    const [dialog_open, setDialogOpen] = useState(false)
 
     const handleSave = () => {
         db.collection('users').doc(props.user.uid).collection('profile').add({
@@ -43,18 +46,7 @@ export default function AddProfile(props){
 return(
     <div style={{display:'flex', justifyContent: 'center'}}>
         <Paper style={{padding: 12, marginTop: 30, width: '100%', maxWidth: 400}}>
-            <Typography variant="h5">My Profile</Typography>
-            <PhotoCard/>
-            <Typography style={{marginTop:16}}>Name</Typography>
-            <TextField fullWidth value={name} onChange={(e)=> setName(e.target.value)}/>
-            <Typography style={{marginTop:16}}>My school/university</Typography>
-            <TextField fullWidth value={school} onChange={(e)=> setSchool(e.target.value)}/>
-            <Typography style={{marginTop:16}}>My major</Typography>
-            <TextField fullWidth value={major} onChange={(e)=> setmajor(e.target.value)}/>
-            <Typography style={{marginTop:16}}>My subject</Typography>
-            <TextField fullWidth value={subject} onChange={(e)=> setSubject(e.target.value)}/>
-            <Typography style={{marginTop:16}}>My hourly rate</Typography>
-            <TextField fullWidth value={rate} onChange={(e)=> setRate(e.target.value)}/>
+        <Photo/>
         </Paper>
     </div>
 )

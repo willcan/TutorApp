@@ -19,39 +19,31 @@ import {
   Typography
 } from "@material-ui/core";
 import AddProfile from "./AddProfile";
-import Dialog from "@material-ui/core/Dialog";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import DialogActions from "@material-ui/core/DialogActions";
-import { Link, Route } from "react-router-dom";
-import { auth } from "./firebase";
+import AddPhoto from "./AddPhoto";
 
 export default function PhotoCard(props) {
+  const [dialog_open, setDialogOpen] = useState(false)
     return (
         <Card>
         <CardActionArea>
           <CardMedia
-            
-            image="/static/images/cards/contemplative-reptile.jpg"
+            style={{height: 140,}}
+            image={props.photo.image}
             title="Contemplative Reptile"
           />
           <CardContent>
             <Typography gutterBottom variant="h5" component="h2">
-              Lizard
+              My Profile
             </Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
-              Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-              across all continents except Antarctica
+            <Typography variant="body2" color="textSecondary" component="p"
+            school={props.photo.school}>
+              
             </Typography>
           </CardContent>
         </CardActionArea>
         <CardActions>
-          <Button size="small" color="primary">
-            Share
-          </Button>
-          <Button size="small" color="primary">
-            Learn More
-          </Button>
+        <Button variant="outlined" color='primary' style={{marginTop:16}} onClick={()=>{setDialogOpen(true)}}>Edit profile photo</Button>
+        <AddPhoto open={dialog_open} onClose={()=>{setDialogOpen(false)}}/>
         </CardActions>
       </Card>
       );

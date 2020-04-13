@@ -25,6 +25,7 @@ export default function AddProfile(props){
         const [major, setmajor] = useState("")
         const [subject, setSubject] = useState("")
         const [rate, setRate] = useState("")
+        const [dialog_open, setDialogOpen] = useState(false)
 
         const handleSave = () => {
             db.collection('users').doc(props.user.uid).set({
@@ -45,7 +46,6 @@ export default function AddProfile(props){
     return(
         <div style={{display:'flex', justifyContent: 'center'}}>
             <Paper style={{padding: 12, marginTop: 30, width: '100%', maxWidth: 400}}>
-                <Typography variant="h5">My Profile</Typography>
                 <Photo/>
                 <Typography style={{marginTop:16}}>Name</Typography>
                 <TextField fullWidth value={name} onChange={(e)=> setName(e.target.value)}/>
