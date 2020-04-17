@@ -21,9 +21,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import { Link, Route } from "react-router-dom";
 import AddPhoto from "./AddPhoto";
-import PhotoCard from "./PhotoCard";
 import { auth, db } from "./firebase";
-import Photo from "./Photo";
 import Profile from "./Profile";
 
 export default function AddProfile(props){
@@ -32,10 +30,11 @@ export default function AddProfile(props){
     const [major, setMajor] = useState("")
     const [subject, setSubject] = useState("")
     const [rate, setRate] = useState("")
-    const [dialog_open, setDialogOpen] = useState(false)
+    const [image, setImage] = useState(false)
 console.log(props.user.uid)
 
     useEffect(()=>{db.collection('users').doc(props.user.uid).onSnapshot((snapshot)=>{
+            setImage(snapshot.data().image)
             setName(snapshot.data().name)
             setSchool(snapshot.data().school)
             setMajor(snapshot.data().major)
@@ -46,8 +45,7 @@ console.log(props.user.uid)
 return(
     <Card>
       <CardActionArea>
-        <CardMedia
-        />
+        <CardMedia image={image} style={{height: 400}}/>
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
           {name}

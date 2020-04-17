@@ -14,7 +14,6 @@ import {
   Typography
 } from "@material-ui/core";
 import AddProfile from "./AddProfile";
-import AddPhoto from "./AddPhoto";
 import { Link, Route } from "react-router-dom";
 import { auth, db } from "./firebase";
 import MyProfile from "./MyProfile";
@@ -186,6 +185,7 @@ export function App(props) {
   console.log(props)
   const [drawer_open, setDrawerOpen] = useState(false);
   const [user, setUser] = useState(null);
+  const [dialog_open, setDialogOpen] = useState("");
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(u => {

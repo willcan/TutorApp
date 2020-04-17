@@ -20,6 +20,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogActions from "@material-ui/core/DialogActions";
 import { Link, Route } from "react-router-dom";
 import { auth, db, storage } from "./firebase";
+import uuid from 'node-uuid';
 
 
 
@@ -30,8 +31,16 @@ export default function AddPhoto(props){
 
         const handleSavePhoto = () => {
 
+          storage.ref("photos/" + uuid()).put(file).then((snapshot) => {
+            snapshot.ref.getDownloadURL().then((downloadURL) =>{
+              db.collection('users').doc(props.user.uid).update({image: downloadURL }).then(()=> {
+                setTitle("");
+                setFile(null);
+                props.onClose();
 
-          db.collection('users').doc(props.user.uid).collection('photos').add({title: title, image: ""})
+              })
+            })
+          })
 };
 
       const handleFile = (e) => {
