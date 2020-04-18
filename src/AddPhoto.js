@@ -57,10 +57,6 @@ export default function AddPhoto(props){
           fullwidth
         >
           <DialogTitle>Add a photo</DialogTitle>
-          <DialogContent>
-            <TextField label="Name" fullwidth={true} value={title} onChange={(e) => {setTitle(e.target.value)} }/>
-            <Button variant='contained' style={{marginTop: 20}}>Choose a file</Button>
-          </DialogContent>
         <DialogActions>
           <Button color="primary" onClick={props.onClose}>
             Cancel

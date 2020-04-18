@@ -249,13 +249,10 @@ export function App(props) {
       >
         <List>
           <ListItem onClick={()=> {props.history.push("/app"); setDrawerOpen(false)}} button>
-            <ListItemText primary="Home" />
+            <ListItemText primary="Edit Profile" />
           </ListItem>
           <ListItem onClick={()=> {props.history.push("/app/MyProfile"); setDrawerOpen(false)}} button>
             <ListItemText primary="My Profile" />
-          </ListItem>
-          <ListItem onClick={()=> {props.history.push("/app/Map"); setDrawerOpen(false)}} button>
-            <ListItemText primary="Map" />
           </ListItem>
         </List>
       </Drawer>
@@ -266,10 +263,6 @@ export function App(props) {
 
       <Route path="/app/MyProfile">
           <MyProfile user={user}/>
-      </Route>
-
-      <Route path="/app/Map">
-          <Map user={user}/>
       </Route>
 
     </div>
