@@ -21,6 +21,7 @@ import DialogActions from "@material-ui/core/DialogActions";
 import { Link, Route } from "react-router-dom";
 import { auth, db, storage } from "./firebase";
 import uuid from 'node-uuid';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 
 
@@ -28,16 +29,17 @@ export default function AddPhoto(props){
         const [dialog_open, setDialogOpen] = useState()
         const [title, setTitle] = useState("")
         const [file, setFile] = useState(null)
+        const [saving, setSaving] = useState(false);
 
         const handleSavePhoto = () => {
-
+          setSaving(true);
           storage.ref("photos/" + uuid()).put(file).then((snapshot) => {
             snapshot.ref.getDownloadURL().then((downloadURL) =>{
               db.collection('users').doc(props.user.uid).update({image: downloadURL }).then(()=> {
                 setTitle("");
                 setFile(null);
+                setSaving(false);
                 props.onClose();
-
               })
             })
           })
@@ -58,13 +60,19 @@ export default function AddPhoto(props){
         >
           <DialogTitle>Add a photo</DialogTitle>
         <DialogActions>
+          <div style={{display: 'flex', alignItems: 'center', marginTop: 20}}>
+        <Button variant='contained' style={{marginTop: 20}} component='label'>
+          Choose a file
+          <input type="file" onChange={handleFile} style={{display: 'none'}}/>
+          </Button>
+          </div>
           <Button color="primary" onClick={props.onClose}>
             Cancel
           </Button>
-          <input type="file" onChange={handleFile} />
-          <Button color="primary" variant="contained" onClick={handleSavePhoto}>
+          <Button color="primary" variant="contained"onClick={handleSavePhoto}>
             Save
           </Button>
+          {saving && <CircularProgress style={{position: 'absolute', top:'70%', left:'85%', marginTop: -12, marginLeft: -12 }} color="secondary" size={24}/>}
         </DialogActions>
       </Dialog>
     )

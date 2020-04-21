@@ -44,28 +44,31 @@ console.log(props.user.uid)
 
 return(
     <Card>
-      <CardActionArea>
-        <CardMedia image={image} style={{height: 400}}/>
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
+    <CardActionArea>
+      <CardMedia image={image} style={{height: 500}}/>
+      <CardContent>
+        <Typography gutterBottom variant="h5" component="h2">
           {name}
-          </Typography>
-          <Typography variant="body1" color="textSecondary" component="p">
-          {school}
-          </Typography>
-          <Typography variant="body1" color="textSecondary" component="p">
-          {major}
-          <Typography variant="body1" color="textSecondary" component="p">
-          {subject}
-          <Typography variant="body1" color="textSecondary" component="p">
-          {rate}
-          </Typography>
-          </Typography>
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-      <CardActions>
-      </CardActions>
-    </Card>
-  );
+        </Typography>
+        <Typography variant="body2" color="textSecondary" component="p">
+          School: {school}
+        </Typography>
+        <Typography style={{marginTop: 6}} variant="body2" color="textSecondary" component="p">
+          Major: {major}
+          <Typography style={{marginTop: 6}} variant="body2" color="textSecondary" component="p">
+          Subject: {subject}
+          <Typography style={{marginTop: 6}} variant="body2" color="textSecondary" component="p">
+          Hourly Rate: {rate}
+        </Typography>
+        </Typography>
+        </Typography>
+      </CardContent>
+    </CardActionArea>
+    <CardActions>
+      <Button size="large" color="primary">
+        start teaching!
+      </Button>
+    </CardActions>
+  </Card>
+);
 }
